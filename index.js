@@ -7,7 +7,7 @@ const router = require("./router");
 const cors = require("cors");
 require("dotenv").config();
 
-const connectionString = `mongodb+srv://jcarlos2n:LBVAv8X0G4IPsVR7@cluster0.td2tswa.mongodb.net/?retryWrites=true&w=majority`;
+const connectionString = `mongodb+srv://jcarlos2n:LBVAv8X0G4IPsVR7@cluster0.td2tswa.mongodb.net/RickAndMorty?retryWrites=true&w=majority`;
 
 app.use(cors());
 app.use(express.json());

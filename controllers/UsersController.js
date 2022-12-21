@@ -43,10 +43,9 @@ UsersController.postUser = async (req, res) => {
             email: email,
             password: password
         }).then(user => {
-            
             res.send(`${user.name}, you have been added succesfully`);
+
         }).catch(err => {
-            
             res.send(err);
         })
     }
@@ -72,7 +71,7 @@ UsersController.loginUser = async (req, res) => {
                 let token = jwt.sign({ user: userFind }, authConfig.secret, {
                     expiresIn: authConfig.expires
                 });
-                let loginOkMessage = `Welcome again ${userFind.nick}`
+                let loginOkMessage = `Welcome again ${userFind.name}`
                 res.json({
                     loginOkMessage,
                     user: {
