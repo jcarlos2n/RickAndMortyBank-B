@@ -18,7 +18,7 @@ mongoose
     .then(() => {
         console.log('Database connected');
     }).catch(err => {
-        console.error("ERROR:",err);
+        console.error(err);
     });
 
 app.listen(PORT, ()=>{
