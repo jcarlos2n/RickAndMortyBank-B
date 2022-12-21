@@ -51,3 +51,43 @@ UsersController.postUser = async (req, res) => {
         })
     }
 };
+
+UsersController.loginUser = async (req, res) => {
+
+    let doc = req.body.email;
+    let clave = req.body.password;
+
+    let user = await User.findOne({ email: doc });
+
+    await User.findOne({
+        email: doc
+    }).then(userFind => {
+
+        if (!userFind) {
+            res.send('Incorrect user or password');
+
+        } else {
+
+            if (bcrypt.compare(clave, userFind.password)) {
+                let token = jwt.sign({ user: userFind }, authConfig.secret, {
+                    expiresIn: authConfig.expires
+                });
+                let loginOkMessage = `Welcome again ${userFind.nick}`
+                res.json({
+                    loginOkMessage,
+                    user: {
+                        name: userFind.name,
+                        redes: userFind.redes
+                    },
+                    token: token
+                })
+            }
+
+
+        }
+    }).catch(err => {
+        console.error(err);
+    })
+};
+
+module.exports = UsersController;
