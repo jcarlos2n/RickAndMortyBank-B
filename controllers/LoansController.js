@@ -1,7 +1,6 @@
 
 const Loan = require("../models/Loan");
 const Account = require("../models/Account");
-const { findByIdAndUpdate } = require("../models/User");
 
 const LoansController = {};
 
