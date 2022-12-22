@@ -1,9 +1,10 @@
 const {Schema, model} = require("mongoose");
 
 const loanSchema = new Schema({
-    cuantity: Number,
+    quantity: Number,
     months: Number,
-    quota: Number
+    quota: Number,
+    account_id: String
 });
 
 const Loan = model("Loan", loanSchema);
