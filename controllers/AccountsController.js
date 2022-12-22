@@ -33,8 +33,6 @@ AccountsController.getAccounts = async (req, res) => {
     }
 
 
-}
-
-
+};
 
 module.exports = AccountsController;

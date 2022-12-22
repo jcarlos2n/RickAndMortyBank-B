@@ -1,6 +1,7 @@
 
 const Loan = require("../models/Loan");
-const Account = require("../models/Account")
+const Account = require("../models/Account");
+const { findByIdAndUpdate } = require("../models/User");
 
 const LoansController = {};
 
@@ -36,5 +37,23 @@ LoansController.getLoans = async (req, res) => {
     }
 
 };
+
+LoansController.payQuote = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const getLoan = await Loan.findById(id);
+        const account = await Account.findById(getLoan.account_id);
+        const opLoan = getLoan.quantity-getLoan.quota;
+        let updateLoan = { quantity : opLoan};
+        const opAccount = account.balance-getLoan.quota;
+        const updateAccount = { quantity : opAccount};
+        const upLoan = await Loan.findByIdAndUpdate(id, updateLoan, { new: true, safe: true, upsert: true })
+        const upAccount = await Account.findByIdAndUpdate(getLoan.account_id, updateAccount, { new: true, safe: true, upsert: true })
+        return res.json({ success: true, loan: upLoan, account: upAccount })
+    } catch (error) {
+        return res.json({ success: false, error: error })
+    }
+}
 
 module.exports = LoansController;
