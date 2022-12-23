@@ -35,8 +35,8 @@ UsersController.postUser = async (req, res) => {
         let password = bcrypt.hashSync(req.body.password, Number.parseInt(3));
 
         if (name === "" || email === "" || password === "") {
-
-            return res.json({err});
+            let message = "Rellena todos los campos"
+            return res.json({success: false, error: message });
         } else {
 
             const createUser = await User.create({
@@ -48,14 +48,13 @@ UsersController.postUser = async (req, res) => {
             let message = createUser.name+", you have been added succesfully";
             return res.json({success: true, data: message })
         }
-    } catch (error) {
-        return res.json({success: false, error: error})
+    } catch (err) {
+        return res.json({success: false, error: err})
     }
 
 };
 
 UsersController.loginUser = async (req, res) => {
-
     let doc = req.body.email;
     let clave = req.body.password;
 
