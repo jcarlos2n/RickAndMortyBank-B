@@ -2,9 +2,10 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const PORT = 3001;
+// const PORT = 3001;
 const router = require("./router");
 const cors = require("cors");
+const config = require("./config")
 require("dotenv").config();
 
 const connectionString = `mongodb+srv://jcarlos2n:LBVAv8X0G4IPsVR7@cluster0.td2tswa.mongodb.net/RickAndMorty?retryWrites=true&w=majority`;
@@ -21,6 +22,6 @@ mongoose
         console.error(err);
     });
 
-app.listen(PORT, ()=>{
-    console.log("Server is running on port", PORT);
+app.listen(config.port, ()=>{
+    console.log("Server is running on port", config.port);
 })
