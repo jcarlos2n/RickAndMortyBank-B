@@ -1,5 +1,5 @@
 
-const User = require('../models/User');
+
 const Account = require('../models/Account')
 const mongoose = require('mongoose');
 
@@ -45,13 +45,10 @@ AccountsController.sendMoney = async (req, res) => {
         if (!friendAccount) {
             return res.json({success: false, error: 'User or account doesn´t exist'});
         }else{
-            const opAccount = account.balance-moneyquantity;
-            const updateAccount = {balance: opAccount};
-            const opFriend = friendAccount.balance+moneyquantity;
-            const updateFriendAccount = {balance: opFriend};
+            const updateAccount = {balance: account.balance-moneyquantity};
+            const updateFriendAccount = {balance: friendAccount.balance+moneyquantity};
             const upAccount = await Account.findByIdAndUpdate(id, updateAccount, { new: true, safe: true, upsert: true });
-            const friendIdtoString = friendAccount._id;
-            const friendId = friendIdtoString.toString();
+            const friendId = (friendAccount._id).toString();
             const upFriendAccount = await Account.findOneAndUpdate({_id: friendId}, updateFriendAccount, { new: true, safe: true, upsert: true });
             return res.json({success: true, account: upAccount, friendAccount: upFriendAccount })
         }
