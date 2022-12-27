@@ -46,7 +46,7 @@ LoansController.payQuote = async (req, res) => {
         const opLoan = getLoan.quantity-getLoan.quota;
         let updateLoan = { quantity : opLoan};
         const opAccount = account.balance-getLoan.quota;
-        const updateAccount = { quantity : opAccount};
+        const updateAccount = { balance : opAccount};
         const upLoan = await Loan.findByIdAndUpdate(id, updateLoan, { new: true, safe: true, upsert: true })
         const upAccount = await Account.findByIdAndUpdate(getLoan.account_id, updateAccount, { new: true, safe: true, upsert: true })
         return res.json({ success: true, loan: upLoan, account: upAccount })

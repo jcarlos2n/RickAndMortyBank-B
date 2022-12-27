@@ -1,5 +1,5 @@
 
-// const User = require('../models/User');
+const User = require('../models/User');
 const Account = require('../models/Account')
 const mongoose = require('mongoose');
 
@@ -34,5 +34,30 @@ AccountsController.getAccounts = async (req, res) => {
 
 
 };
+
+AccountsController.sendMoney = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user_id = req.body.user_id;
+        const moneyquantity = req.body.quantity;
+        const account = await Account.findById(id);
+        const friendAccount = await Account.findOne({user_id : user_id});
+        if (!friendAccount) {
+            return res.json({success: false, error: 'User or account doesn´t exist'});
+        }else{
+            const opAccount = account.balance-moneyquantity;
+            const updateAccount = {balance: opAccount};
+            const opFriend = friendAccount.balance+moneyquantity;
+            const updateFriendAccount = {balance: opFriend};
+            const upAccount = await Account.findByIdAndUpdate(id, updateAccount, { new: true, safe: true, upsert: true });
+            const friendIdtoString = friendAccount._id;
+            const friendId = friendIdtoString.toString();
+            const upFriendAccount = await Account.findOneAndUpdate({_id: friendId}, updateFriendAccount, { new: true, safe: true, upsert: true });
+            return res.json({success: true, account: upAccount, friendAccount: upFriendAccount })
+        }
+    } catch (error) {
+        return res.json({ success: false, error: error})
+    }
+}
 
 module.exports = AccountsController;
