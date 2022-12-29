@@ -78,7 +78,7 @@ UsersController.loginUser = async (req, res) => {
                     loginOkMessage,
                     user: {
                         name: userFind.name,
-                        redes: userFind.redes
+                        id: userFind._id
                     },
                     token: token
                 })
