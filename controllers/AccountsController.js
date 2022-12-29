@@ -73,6 +73,24 @@ AccountsController.depositMoney = async (req, res) => {
     } catch (err) {
         return res.json({success: false, error: err})
     }
-}
+};
+
+AccountsController.cashOut = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const quantity = req.body.quantity;
+        const account = await Account.findById(id);
+        if (!account) {
+            return res.json({success: false, error: 'User or account doesn´t exist'});
+
+        }else{
+            const update = {balance: account.balance-quantity};
+            const upAccount = await Account.findByIdAndUpdate(id, update, { new: true, safe: true, upsert: true });
+            return res.json({success: true, data: upAccount})
+        }
+    } catch (err) {
+        return res.json({success: false, error: err})
+    }
+};
 
 module.exports = AccountsController;
