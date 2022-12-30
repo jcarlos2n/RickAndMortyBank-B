@@ -43,8 +43,9 @@ LoansController.payQuote = async (req, res) => {
 
         const getLoan = await Loan.findById(id);
         const account = await Account.findById(getLoan.account_id);
-        const opLoan = getLoan.quantity-getLoan.quota;
-        let updateLoan = { quantity : opLoan};
+        const opQuantity = getLoan.quantity-getLoan.quota;
+        const opQuota = getLoan.months-1;
+        let updateLoan = { quantity : opQuantity, months: opQuota};
         const opAccount = account.balance-getLoan.quota;
         const updateAccount = { balance : opAccount};
         const upLoan = await Loan.findByIdAndUpdate(id, updateLoan, { new: true, safe: true, upsert: true })

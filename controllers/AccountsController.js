@@ -21,12 +21,26 @@ AccountsController.createAccount = async (req, res) => {
     }
 };
 
-AccountsController.getAccounts = async (req, res) => {
+AccountsController.getAllAccounts = async (req, res) => {
     try {
         const { id } = req.params;
 
         const getAllAccounts = await Account.find({ user_id: id })
         return res.json({ success: true, data: getAllAccounts })
+
+    } catch (error) {
+        return res.json({ success: false, error: "something error" })
+    }
+
+
+};
+
+AccountsController.getAccount = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const getAccount = await Account.findById(id);
+        return res.json({ success: true, data: getAccount })
 
     } catch (error) {
         return res.json({ success: false, error: "something error" })

@@ -7,12 +7,16 @@ let authConfig = require('../config/auth')
 
 const UsersController = {};
 
-UsersController.getUsers = (req, res) => {
-
-    User.find({}).then(result => {
-        res.json(result);
-        mongoose.connection.close();
-    })
+UsersController.getUsers = async (req, res) => {
+    try {
+       const users = await  User.find({});
+       return res.json({success: true, data: users})
+    } catch (error) {
+        return res.json({success: false, data: "Something has gone wrong"})
+    }
+//    .then(result => {
+//         res.json(result);
+//     })
 };
 
 UsersController.getData = async (req, res) => {
