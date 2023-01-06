@@ -1,12 +1,13 @@
 const {Schema, model} = require("mongoose");
 
 const noticeSchema = new Schema({
-    quantity: String,
-    concept: String,
-    date: String,
-    account_id: String,
+    quantity: {type: String, required: true},
+    concept: {type: String, required: true},
+    date: {type: String, required: true},
+    account_id: {type: String, required: true},
     status: Boolean
 });
+
 
 const Notice = model("Notice", noticeSchema);
 

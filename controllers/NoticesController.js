@@ -46,4 +46,26 @@ NoticesController.noticeView = async (req, res) => {
     }
 };
 
+NoticesController.getNoticeNotView = async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        const getNotices = await Notice.find({ account_id: id, status: true })
+        return res.json({ success: true, data: getNotices })
+    } catch (error) {
+        
+    }
+};
+
+NoticesController.getAllNotices = async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        const getNotices = await Notice.find({ account_id: id })
+        return res.json({ success: true, data: getNotices })
+    } catch (error) {
+        
+    }
+};
+
 module.exports = NoticesController;
