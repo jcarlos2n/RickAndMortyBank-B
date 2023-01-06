@@ -5,6 +5,6 @@ const NoticesController = require('../controllers/NoticesController');
 
 // router.get('/getLoans/:id' , LoansController.getLoans);
 router.post('/createnotice', NoticesController.createNotice);
-// router.put('/payQuote/:id', LoansController.payQuote);
+router.put('/noticeview/:id', NoticesController.noticeView);
 
 module.exports = router;

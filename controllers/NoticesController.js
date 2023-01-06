@@ -17,14 +17,30 @@ NoticesController.createNotice = async (req, res) => {
         const account = await Account.findById(account_id);
         if (account) {
             const createNotice = await Notice.create({
-            quantity: quantity,
-            concept: concept,
-            date: date,
-            account_id: account_id,
-            status: status
-        })
-        return res.json({ success: true, data: createNotice, account: account })
+                quantity: quantity,
+                concept: concept,
+                date: date,
+                account_id: account_id,
+                status: status
+            })
+            return res.json({ success: true, data: createNotice, account: account })
+        }
+    } catch (error) {
+        return res.json({ success: false, error: error })
     }
+};
+
+NoticesController.noticeView = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const getNotice = await Notice.findById(id);
+        if (getNotice) {
+            let updateNotice = { status: false};
+            const upNotice = await Notice.findByIdAndUpdate(id, updateNotice, { new: true, safe: true, upsert: true })
+
+            return res.json({ success: true, data: upNotice })
+        }
     } catch (error) {
         return res.json({ success: false, error: error })
     }
