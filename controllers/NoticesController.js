@@ -1,0 +1,33 @@
+
+const Notice = require('../models/Notice');
+const Account = require('../models/Account');
+
+const NoticesController = {};
+
+const actualDate = new Date().toUTCString();
+
+NoticesController.createNotice = async (req, res) => {
+    try {
+        let quantity = req.body.quantity;
+        let concept = req.body.concept;
+        let date = actualDate;
+        let account_id = req.body.account_id;
+        let status = true;
+
+        const account = await Account.findById(account_id);
+        if (account) {
+            const createNotice = await Notice.create({
+            quantity: quantity,
+            concept: concept,
+            date: date,
+            account_id: account_id,
+            status: status
+        })
+        return res.json({ success: true, data: createNotice, account: account })
+    }
+    } catch (error) {
+        return res.json({ success: false, error: error })
+    }
+};
+
+module.exports = NoticesController;
