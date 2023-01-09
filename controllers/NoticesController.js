@@ -50,7 +50,7 @@ NoticesController.getNoticeNotView = async (req, res) => {
     try {
         const { id } = req.params;
         
-        const getNotices = await Notice.find({ account_id: id, status: true })
+        const getNotices = await Notice.find({ account_id: id, status: true }).sort({'date': -1})
         return res.json({ success: true, data: getNotices })
     } catch (error) {
         
