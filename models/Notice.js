@@ -5,9 +5,8 @@ const noticeSchema = new Schema({
     concept: {type: String, required: true},
     date: {type: String, required: true},
     account_id: {type: String, required: true},
-    status: Boolean
+    status: {type: Boolean, default: true}
 });
-
 
 const Notice = model("Notice", noticeSchema);
 
