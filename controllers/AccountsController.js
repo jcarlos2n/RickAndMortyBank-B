@@ -67,14 +67,13 @@ AccountsController.sendMoney = async (req, res) => {
         const quantityF = `+${moneyquantity}€`;
         const concept = `${user.name} te ha enviado dinero`;
         const date = actualDate;
-        const status = true;
         const createNotice = await Notice.create({
             quantity: quantityF,
             concept,
             date,
             account_id: friendAccount._id,
-            status
         });
+        
         const updateAccount = { balance: account.balance - moneyquantity };
         const updateFriendAccount = { balance: friendAccount.balance + moneyquantity };
         const upAccount = await Account.findByIdAndUpdate(id, updateAccount, { new: true, safe: true, upsert: true });
