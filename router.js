@@ -1,6 +1,5 @@
 
 const router = require("express").Router();
-
 const UsersRouter = require('./views/UsersRouter');
 const AccountsRouter = require('./views/AccountsRouter');
 const LoansRouter = require('./views/LoansRouter');
