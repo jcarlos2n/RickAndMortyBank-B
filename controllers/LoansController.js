@@ -8,12 +8,20 @@ const actualDate = new Date().toUTCString();
 
 LoansController.createNewLoan = async (req, res) => {
     try {
+        const userId = req.user.user._id;
         const quantity = req.body.quantity;
         const months = req.body.months;
         const account_id = req.body.account_id;
 
+        const userAccount = await Account.findOne({_id: account_id, user_id: userId})
+        
         if (quantity == "" || months == "" || account_id == "") {
             return res.json({ success: false, message: "Please fill in the missing fields"})
+        }
+
+        if (!userAccount) {
+            return res.json({ success: false, message: "This account does not belong to this user"})
+
         }
 
         const createLoan = await Loan.create({
