@@ -55,6 +55,7 @@ AccountsController.sendMoney = async (req, res) => {
         const moneyquantity = req.body.quantity;
         const account = await Account.findById(id);
         const user = await User.findById(account.user_id);
+        const friendUser = await User.findById(user_id);
         const friendAccount = await Account.findOne({ user_id: user_id });
 
         if (moneyquantity == '' || user_id == '') {
@@ -66,12 +67,20 @@ AccountsController.sendMoney = async (req, res) => {
 
         const quantityF = `+${moneyquantity}€`;
         const concept = `${user.name} te ha enviado dinero`;
-        const date = actualDate;
         const createNotice = await Notice.create({
             quantity: quantityF,
             concept,
-            date,
+            date: actualDate,
             account_id: friendAccount._id,
+        });
+
+        const quantityO = `-${moneyquantity}€`;
+        const conceptO = `Has enviado dinero a ${friendUser.name}`;
+        const createNoticeForMe = await Notice.create({
+            quantity: quantityO,
+            concept: conceptO,
+            date: actualDate,
+            account_id: id,
         });
         
         const updateAccount = { balance: account.balance - moneyquantity };
@@ -99,6 +108,15 @@ AccountsController.depositMoney = async (req, res) => {
         const update = { balance: account.balance + quantity };
         const upAccount = await Account.findByIdAndUpdate(id, update, { new: true, safe: true, upsert: true });
 
+        const quantityF = `+${quantity}€`;
+        const concept = `Has ingresado ${quantity}€ desde un cajero`;
+        const createNotice = await Notice.create({
+            quantity: quantityF,
+            concept,
+            date: actualDate,
+            account_id: id,
+        });
+
         return res.json({ success: true, data: upAccount });
     } catch (err) {
         return res.json({ success: false, error: err });
@@ -121,6 +139,15 @@ AccountsController.cashOut = async (req, res) => {
 
         const update = { balance: account.balance - quantity };
         const upAccount = await Account.findByIdAndUpdate(id, update, { new: true, safe: true, upsert: true });
+
+        const quantityF = `-${quantity}€`;
+        const concept = `Has retirado ${quantity}€ desde un cajero`;
+        const createNotice = await Notice.create({
+            quantity: quantityF,
+            concept,
+            date: actualDate,
+            account_id: id,
+        });
 
         return res.json({ success: true, data: upAccount });
     } catch (err) {
