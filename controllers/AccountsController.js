@@ -52,20 +52,21 @@ AccountsController.sendMoney = async (req, res) => {
     try {
         const { id } = req.params;
         const user_id = req.body.user_id;
-        const moneyquantity = req.body.quantity;
+        const quantity = req.body.quantity;
         const account = await Account.findById(id);
         const user = await User.findById(account.user_id);
         const friendUser = await User.findById(user_id);
         const friendAccount = await Account.findOne({ user_id: user_id });
+        console.log(friendAccount)
 
-        if (moneyquantity == '' || user_id == '') {
+        if (quantity == '' || user_id == '') {
             return res.json({ success: false, error: 'Please fill in the missing fields' })
         }
         if (!friendAccount) {
             return res.json({ success: false, error: 'User or account doesn´t exist' });
         }
 
-        const quantityF = `+${moneyquantity}€`;
+        const quantityF = `+${quantity}€`;
         const concept = `${user.name} te ha enviado dinero`;
         const createNotice = await Notice.create({
             quantity: quantityF,
@@ -74,7 +75,7 @@ AccountsController.sendMoney = async (req, res) => {
             account_id: friendAccount._id,
         });
 
-        const quantityO = `-${moneyquantity}€`;
+        const quantityO = `-${quantity}€`;
         const conceptO = `Has enviado dinero a ${friendUser.name}`;
         const createNoticeForMe = await Notice.create({
             quantity: quantityO,
@@ -83,11 +84,10 @@ AccountsController.sendMoney = async (req, res) => {
             account_id: id,
         });
         
-        const updateAccount = { balance: account.balance - moneyquantity };
-        const updateFriendAccount = { balance: friendAccount.balance + moneyquantity };
+        const updateAccount = { balance: account.balance - quantity };
+        const updateFriendAccount = { balance: friendAccount.balance + quantity };
         const upAccount = await Account.findByIdAndUpdate(id, updateAccount, { new: true, safe: true, upsert: true });
-        const friendId = (friendAccount._id).toString();
-        const upFriendAccount = await Account.findOneAndUpdate({ _id: friendId }, updateFriendAccount, { new: true, safe: true, upsert: true });
+        const upFriendAccount = await Account.findOneAndUpdate({ _id: friendAccount._id }, updateFriendAccount, { new: true, safe: true, upsert: true });
 
         return res.json({ success: true, account: upAccount, friendAccount: upFriendAccount })
     } catch (error) {
@@ -117,7 +117,7 @@ AccountsController.depositMoney = async (req, res) => {
             account_id: id,
         });
 
-        return res.json({ success: true, data: upAccount });
+        return res.json({ success: true, account: upAccount });
     } catch (err) {
         return res.json({ success: false, error: err });
     }
@@ -149,7 +149,7 @@ AccountsController.cashOut = async (req, res) => {
             account_id: id,
         });
 
-        return res.json({ success: true, data: upAccount });
+        return res.json({ success: true, account: upAccount });
     } catch (err) {
         return res.json({ success: false, error: err });
     }
