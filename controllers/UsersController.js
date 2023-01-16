@@ -84,4 +84,31 @@ UsersController.loginUser = async (req, res) => {
     }
 };
 
+UsersController.updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const name = req.body.name;
+        const newUpdate = {
+            name
+        }
+        const user = await User.findByIdAndUpdate(id, newUpdate, { new: true, safe: true, upsert: true })
+
+        return res.json({ success: true, data: user })
+    } catch (error) {
+        res.json({ success: false, error: error })
+    }
+}
+
+UsersController.deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userDelete = await User.findByIdAndDelete(id)
+    
+        return res.json({ success: true, data: userDelete }) 
+    } catch (err) {
+        return res.json({ success: false, error: err})
+    }
+
+}
+
 module.exports = UsersController;

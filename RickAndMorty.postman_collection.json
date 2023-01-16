@@ -1,0 +1,375 @@
+{
+	"info": {
+		"_postman_id": "9f37fab8-5fb9-4536-b8a7-a25f038f813e",
+		"name": "RickAndMorty",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LOANS",
+			"item": [
+				{
+					"name": "pay Quote",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get Loans",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "create Loan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\" : 200,\r\n    \"months\" : 12,\r\n    \"account_id\" : \"63a43611ae0502172194861e\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/loans/createLoan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"loans",
+								"createLoan"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "get accounts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/account/getallaccounts/63a491527455ed8d8f0c14f4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"account",
+								"getallaccounts",
+								"63a491527455ed8d8f0c14f4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n         \"user_id\": \"63a491527455ed8d8f0c14f4\",\r\n         \"balance\": 12.45\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/accounts/createAccount",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"accounts",
+								"createAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendmoney",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\" : \"63a491527455ed8d8f0c14f4\",\r\n    \"quantity\": 123.45\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/accounts/sendmoney/63a43611ae0502172194861e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"accounts",
+								"sendmoney",
+								"63a43611ae0502172194861e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deposit money",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "cashOut",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getAccount",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "post notice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": \"-123€\",\r\n    \"concept\": \"Cuota prestamo pagada\",\r\n    \"account_id\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/notices/createnotice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"notices",
+								"createnotice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeStatusNotice",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get Notices not view",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get all notices",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "postuser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"annie@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"rick@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzYzUyZDNkYTcwMGU3MzRiNzliZDZlYSIsIm5hbWUiOiJQYWNvIiwiZW1haWwiOiJwYWNvQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDA0JFpFajR4cTFGbkZpMmIzNTR4QUZBU09jNWYyTmQvMDZIb0t6ZWMzMkRGeHVDTFRmNzJMM3RPIiwiX192IjowfSwiaWF0IjoxNjczODY2NjkyLCJleHAiOjE2NzM4Nzc0OTJ9.dTBTuXxQ3MXeToE6Z2rfqWxH6qt4PkkajRhJdVF1jH0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Francisco\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/users/update/63c52d3da700e734b79bd6ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"update",
+								"63c52d3da700e734b79bd6ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzYzUyZDNkYTcwMGU3MzRiNzliZDZlYSIsIm5hbWUiOiJQYWNvIiwiZW1haWwiOiJwYWNvQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDA0JFpFajR4cTFGbkZpMmIzNTR4QUZBU09jNWYyTmQvMDZIb0t6ZWMzMkRGeHVDTFRmNzJMM3RPIiwiX192IjowfSwiaWF0IjoxNjczODY2NjkyLCJleHAiOjE2NzM4Nzc0OTJ9.dTBTuXxQ3MXeToE6Z2rfqWxH6qt4PkkajRhJdVF1jH0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/users/delete/63c52d3da700e734b79bd6ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"delete",
+								"63c52d3da700e734b79bd6ea"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
