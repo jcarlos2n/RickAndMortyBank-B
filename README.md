@@ -17,17 +17,17 @@ ___
 
 ## About
 
-El proyecto consiste en una entidad bancaria para el mundo ficticio de Rick and Morty, cada personaje dispone de su cuenta y puede realizar varias operaciones en ella, como pedir préstamos, envíar dinero a amigos, ingresar y sacar dinero, pagar cuotas, y revisar las notificaciones.
+El proyecto consiste en una entidad bancaria para el mundo ficticio de Rick and Morty, cada personaje dispone de su cuenta y puede realizar varias operaciones en ella, como pedir préstamos, enviar dinero a amigos, ingresar y sacar dinero, pagar cuotas, y revisar las notificaciones.
 
-He creado este Back-End con base de datos no relacional usando MongoDB, Express y Mongoose, en el que hay 4 tablas, las cuales se relacionan entre si.
+He creado este Back-End con base de datos no relacional usando MongoDB, Express y Mongoose, en el que hay 4 tablas, las cuales se relacionan entre sí.
 
 ---
 
 ## Usage
 
-Para utilizarlo, debemos descargar el repositorio e intalar las dependencias con el comando "npm i", una vez instaladas, inicializamos el Back-End con el comando npm start.
+Para utilizarlo, debemos descargar el repositorio e instalar las dependencias con el comando "npm i", una vez instaladas, inicializamos el Back-End con el comando "npm start".
 
-Para utilizarlo con PostMan, disponemos de un JSON con todas las consultas disponibles.
+Para usarlo con PostMan, disponemos de un JSON con todas las consultas disponibles.
 
 Se recomienda usarlo con el usuario de Rick o de Morty, sus datos serían:
 email: rick@gmail.com o morty@gmail.com
