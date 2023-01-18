@@ -108,7 +108,6 @@ UsersController.deleteUser = async (req, res) => {
     } catch (err) {
         return res.json({ success: false, error: err})
     }
-
-}
+};
 
 module.exports = UsersController;

@@ -70,8 +70,6 @@ LoansController.payQuote = async (req, res) => {
             return res.json({ success: false, message: "Loan or Account don´t found" });
         }
 
-
-
         const opQuantity = getLoan.quantity - getLoan.quota;
         const opQuota = getLoan.months - 1;
         const updateLoan = { quantity: opQuantity, months: opQuota };
